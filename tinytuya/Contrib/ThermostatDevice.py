@@ -224,7 +224,7 @@ class ThermostatDevice(Device):
 
     sensor_dps = ('122', '125', '126', '127', '128')
     dps_data = {
-        '2' : { 'name': 'mode', 'enum': ['auto', 'cool', 'heat', 'emergencyheat', 'off'] },
+        #'2' : { 'name': 'mode', 'enum': ['auto', 'cool', 'heat', 'emergencyheat', 'off'] },
         '16': { 'name': 'temp_set', 'alt': 'setpoint_c', 'scale': 100 },
         '17': { 'name': 'temp_set_f', 'alt': 'setpoint_f' },
         '18': { 'name': 'upper_temp_f', 'alt': 'cooling_setpoint_f', 'high_resolution': False },
@@ -242,7 +242,7 @@ class ThermostatDevice(Device):
         '109': { 'name': 'lower_temp', 'alt': 'heating_setpoint_c', 'scale': 100, 'high_resolution': True },
         '110': { 'name': 'upper_temp_f', 'alt': 'cooling_setpoint_f', 'high_resolution': True },
         '111': { 'name': 'lower_temp_f', 'alt': 'heating_setpoint_f', 'high_resolution': True },
-        '115': { 'name': 'fan', 'enum': ['auto', 'cycle', 'on'] },
+        #'115': { 'name': 'fan', 'enum': ['auto', 'cycle', 'on'] },
         '116': { 'name': 'home' },
         '118': { 'name': 'schedule', 'base64': True, 'selfclass': 'ThermostatSchedule' },
         '119': { 'name': 'schedule_enabled' },
