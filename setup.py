@@ -1,29 +1,25 @@
+import sys
+import os
+# Ensure the local folder is searched first
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
+
 import setuptools
 import importlib.metadata
-import re
-import os
-
-# Read version string directly without importing the module
-with open(os.path.join("tinytuya", "__init__.py"), "r", encoding="utf-8") as f:
-    version_match = re.search(r"^__version__\s*=\s*['\"]([^'\"]*)['\"]", f.read(), re.M)
-    if version_match:
-        __version__ = version_match.group(1)
-    else:
-        raise RuntimeError("Unable to find version string.")
+from tinytuya import __version__
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 INSTALL_REQUIRES = [
-    'requests',      # Used for Setup Wizard - Tuya IoT Platform calls
-    'colorama',      # Makes ANSI escape character sequences work under MS Windows.
+    'requests',      
+    'colorama',      
 ]
 
 CHOOSE_CRYPTO_LIB = [
-    'cryptography',  # pyca/cryptography - https://cryptography.io/en/latest/
-    'pycryptodome',  # PyCryptodome      - https://pycryptodome.readthedocs.io/en/latest/
-    'pyaes',         # pyaes             - https://github.com/ricmoo/pyaes
-    'pycrypto',      # PyCrypto          - https://www.pycrypto.org/
+    'cryptography',  
+    'pycryptodome',  
+    'pyaes',         
+    'pycrypto',      
 ]
 
 pref_lib = CHOOSE_CRYPTO_LIB[0]
