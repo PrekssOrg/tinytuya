@@ -1,5 +1,5 @@
 import setuptools
-from pkg_resources import DistributionNotFound, get_distribution
+import importlib.metadata
 
 from tinytuya import __version__
 
@@ -21,13 +21,14 @@ CHOOSE_CRYPTO_LIB = [
 pref_lib = CHOOSE_CRYPTO_LIB[0]
 for cryptolib in CHOOSE_CRYPTO_LIB:
     try:
-        get_distribution(cryptolib)
+        # Use modern importlib.metadata instead of pkg_resources
+        importlib.metadata.version(cryptolib)
         pref_lib = cryptolib
         break
-    except DistributionNotFound:
+    except importlib.metadata.PackageNotFoundError:
         pass
 
-INSTALL_REQUIRES.append( pref_lib )
+INSTALL_REQUIRES.append(pref_lib)
 
 setuptools.setup(
     name="tinytuya",
