@@ -1,12 +1,17 @@
 import setuptools
 import importlib.metadata
-import sys
+import re
 import os
-sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
 
-from tinytuya import __version__
+# Read version string directly without importing the module
+with open(os.path.join("tinytuya", "__init__.py"), "r", encoding="utf-8") as f:
+    version_match = re.search(r"^__version__\s*=\s*['\"]([^'\"]*)['\"]", f.read(), re.M)
+    if version_match:
+        __version__ = version_match.group(1)
+    else:
+        raise RuntimeError("Unable to find version string.")
 
-with open("README.md", "r") as fh:
+with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 INSTALL_REQUIRES = [
@@ -24,7 +29,6 @@ CHOOSE_CRYPTO_LIB = [
 pref_lib = CHOOSE_CRYPTO_LIB[0]
 for cryptolib in CHOOSE_CRYPTO_LIB:
     try:
-        # Use modern importlib.metadata instead of pkg_resources
         importlib.metadata.version(cryptolib)
         pref_lib = cryptolib
         break
